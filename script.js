@@ -38,3 +38,38 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
     clickedCell.innerText = currentPlayer;
     clickedCell.classList.add(currentPlayer.toLowerCase());
 }
+
+// Function to validate the result
+function handleResultValidation() {
+    let roundWon = false;
+
+    for (let i = 0; i < winningConditions.length; i++) {
+        const winCondition = winningConditions[i];
+        let a = gameState[winCondition[0]];
+        let b = gameState[winCondition[1]];
+        let c = gameState[winCondition[2]];
+
+        if (a === '' || b === '' || c === '') {
+            continue;
+        }
+        if (a === b && b === c) {
+            roundWon = true;
+            break;
+        }
+    }
+    // Win
+    if (roundWon) {
+        statusDisplay.innerText = `¡El jugador ${currentPlayer} ha ganado!`;
+        gameActive = false;
+        return;
+    }
+
+    // Draw
+    let roundDraw = !gameState.includes("");
+    if (roundDraw) {
+        statusDisplay.innerText = "¡Empate!";
+        gameActive = false;
+        return;
+    }
+    handlePlayerChange();
+}
