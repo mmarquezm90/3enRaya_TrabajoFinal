@@ -73,3 +73,12 @@ function handleResultValidation() {
     }
     handlePlayerChange();
 }
+
+// Shift change function
+function handlePlayerChange() {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerText = `Turno de ${currentPlayer}`;
+}
+
+cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+statusDisplay.innerText = `Turno de ${currentPlayer}`;
